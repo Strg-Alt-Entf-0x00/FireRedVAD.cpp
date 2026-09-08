@@ -9,17 +9,17 @@ A **zero-dependency, memory-safe, and highly optimized C++ inference engine** fo
 
 This repository allows you to run FireRedVAD on edge devices, desktops, and servers without PyTorch, Torchaudio, or Kaldi, achieving up to **~53x realtime** processing speed on a single CPU core.
 
-## 🎯 Key Achievements & Features
+## Key Achievements & Features
 
 - **100% Mathematical Parity**: The C++ inference engine has been scientifically validated to produce the exact same raw logits and probabilities as the PyTorch golden standard. All Kaldi-specific quirks (e.g., asymmetric padding, energy floor `log(max(sum, eps))`, and continuous mel-bank mapping) are natively replicated.
 - **State-of-the-Art Performance**: Built on [GGML](https://github.com/ggerganov/ggml), the engine utilizes zero-allocation graph reuse during inference, keeping memory footprints incredibly small and execution blazingly fast.
 - **Native Dependency-Free Audio Processing**: We implemented a custom $O(N \log N)$ Radix-2 Cooley-Tukey FFT and a Torchaudio-aligned Fbank extractor natively in C++.
 - **Memory-Safe Architecture**: The entire library is wrapped in modern C++ RAII semantics (`std::unique_ptr`, `fireredVADContext` destructors), strictly guaranteeing 0 memory leaks.
 
-## 🚀 Pre-converted GGUF Models
+## Pre-converted GGUF Models
 
 We host all pre-converted, quantized models on HuggingFace:
-👉 **[Strg-Alt-Entf-0x00/FireRedVAD-GGUF](https://huggingface.co/Strg-Alt-Entf-0x00/FireRedVAD-GGUF)**
+**[Strg-Alt-Entf-0x00/FireRedVAD-GGUF](https://huggingface.co/Strg-Alt-Entf-0x00/FireRedVAD-GGUF)**
 
 *Note: Please ensure you are using models uploaded **after August 30, 2026**, as earlier versions contained a transposition error in the FSMN lookahead filters.*
 
@@ -38,7 +38,7 @@ We host all pre-converted, quantized models on HuggingFace:
 | **INT8-CH** | 8-bit Per-Channel | 4x | ~4x | **Recommended for Edge / Mobile / IoT** (Preserves DFSMN channel variance perfectly) |
 | **INT8** | 8-bit Per-Tensor | 4x | ~4x | Maximum compression, slight accuracy drop |
 
-## 📊 Scientific Benchmarks
+## Scientific Benchmarks
 
 *Hardware: Standard Windows Desktop CPU (x86_64, Single Threaded). Audio length: 18.696s.*
 *Date: 2026-08-30*
@@ -51,7 +51,7 @@ We host all pre-converted, quantized models on HuggingFace:
 
 *Note: The C++ execution speeds above include the entire pipeline (WAV parsing, Fbank extraction, CMVN normalization, and GGML inference).*
 
-## 💻 C++ Integration (CMake)
+## C++ Integration (CMake)
 
 The library is designed for seamless CMake integration.
 
@@ -81,7 +81,7 @@ int main() {
 }
 ```
 
-## 🛠️ Tooling & Scripts
+## Tooling & Scripts
 
 The repository includes a suite of professional Python scripts:
 
@@ -90,10 +90,9 @@ The repository includes a suite of professional Python scripts:
 - `tools/convert_all_models.bat`: Batch converts all architectures into all quantizations.
 - `tools/golden_test/test_weight_fidelity.py`: Validates GGUF weight integrity against original PyTorch tensors.
 
-## 🤝 Acknowledgments
+## Acknowledgments
 
 - **[FireRedTeam/FireRedVAD](https://github.com/FireRedTeam/FireRedVAD)**: The original creators of the DFSMN architecture and PyTorch implementation.
 - **[GGML](https://github.com/ggerganov/ggml)**: The incredible tensor library powering the C++ inference engine.
 
 ---
-*Developed with 🩵 to push the boundaries of embedded voice AI.*
