@@ -855,22 +855,16 @@ fireredVADContext* firered_vad_init(const char* model_path, const fireredVADConf
     // Initialize GGML backend — auto-detect best available backend
     ggml_backend_load_all();
     
-#ifdef GGML_USE_CUDA
-    // Try CUDA first — always prefer GPU when compiled in
-    ctx->backend = ggml_backend_cuda_init(0);  // Device 0
+    // Try GPU first
+    ctx->backend = ggml_backend_init_by_type(GGML_BACKEND_DEVICE_TYPE_GPU, nullptr);
     if (ctx->backend) {
         ctx->config.use_gpu = true;
-        std::cout << "[firered VAD] CUDA backend selected (GPU acceleration active)" << std::endl;
+        std::cout << "[firered VAD] GPU backend selected (acceleration active)" << std::endl;
     } else {
-        std::cout << "[firered VAD] CUDA init failed — falling back to CPU" << std::endl;
+        std::cout << "[firered VAD] GPU init failed or unavailable — falling back to CPU" << std::endl;
         ctx->config.use_gpu = false;
-        ctx->backend = ggml_backend_cpu_init();
+        ctx->backend = ggml_backend_init_by_type(GGML_BACKEND_DEVICE_TYPE_CPU, nullptr);
     }
-#else
-    // CPU-only build
-    ctx->config.use_gpu = false;
-    ctx->backend = ggml_backend_cpu_init();
-#endif
 
     
     if (!ctx->backend) {
