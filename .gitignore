@@ -6,9 +6,6 @@ out/
 # Log files
 logs/
 
-# Backup files
-tools/backup/backups/
-
 # Downloaded GGUF models
 models_gguf/
 *.gguf
@@ -27,9 +24,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
-
-# Kiro IDE
-.kiro/
 
 # Project documentation (internal)
 .docs/
@@ -104,6 +98,3 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-# HuggingFace upload cache
-hf_upload/
