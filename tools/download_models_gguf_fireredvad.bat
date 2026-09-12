@@ -11,13 +11,13 @@ echo.
 
 REM Get the directory where this batch file is located
 set "SCRIPT_DIR=%~dp0"
-set "PYTHON_SCRIPT=%SCRIPT_DIR%models_downloader\download_gguf_models.py"
+set "PYTHON_SCRIPT=%SCRIPT_DIR%models_downloader\download_models_gguf_fireredvad.py"
 
 REM Check if the Python script exists
 if not exist "%PYTHON_SCRIPT%" (
     echo [ERROR] Python script not found: %PYTHON_SCRIPT%
     echo.
-    echo Please ensure download_gguf_models.py is in the same directory
+    echo Please ensure download_models_gguf_fireredvad.py is in the same directory
     echo.
     pause
     exit /b 1
